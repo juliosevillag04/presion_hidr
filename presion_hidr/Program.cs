@@ -109,10 +109,20 @@ void pedirDatos()
 
     double s = mediciones[i].s;
 
-    double rho = 1000.0; // kg/m^3
-    double g = 9.81;    // m/s^2
-    double b = 0.075;   // m
-    double L = 0.1;     // m
+    /*
+    Constantes utilizadas:
+    Concepto                | Letra | Unidad de medida
+    ==================================================
+    Densidad del agua       | rho   | kg/m³
+    Aceleración gravedad    | g     | m/s²
+    Ancho de la superficie  | b     | m
+    Longitud de la placa    | L     | m
+    */
+
+    double rho = 1000.0; 
+    double g = 9.81;   
+    double b = 0.075;   
+    double L = 0.1;   
 
     /*
     Incógnitas a encontrar:
@@ -261,7 +271,7 @@ void guardarArchivo()
     }
 }
 
-void leerArchivo()
+void leerArchivo() //es el encargado de abrir y recorrer el archivo
 {
     try
     {
@@ -290,7 +300,7 @@ void leerArchivo()
     }
 }
 
-void procesarLineaArchivo(string linea)
+void procesarLineaArchivo(string linea) //es el encargado de convertir cada línea en una medición
 {
     if (i >= 15)
     {

@@ -1,8 +1,8 @@
 ﻿/* Almacenar 15 registros de mediciones hidrostáticas */
 using System;
 using System.IO;
-
 using System.Globalization; // Permite usar configuraciones culturales específicas en el programa.
+using System.Text;
 
 CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture; // Establece la cultura del programa para usar el punto como separador decimal.
 CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture; // Aplica la misma configuración cultural a los mensajes y formatos del programa.
@@ -119,10 +119,10 @@ void pedirDatos()
     Longitud de la placa    | L     | m
     */
 
-    double rho = 1000.0; 
-    double g = 9.81;   
-    double b = 0.075;   
-    double L = 0.1;   
+    double rho = 1000.0; // kg/m^3
+    double g = 9.81;    // m/s^2
+    double b = 0.075;   // m
+    double L = 0.1;     // m
 
     /*
     Incógnitas a encontrar:
@@ -246,8 +246,9 @@ void guardarArchivo()
 {
     try
     {
-        using StreamWriter archivo = new StreamWriter(rutaDescargas);
+        using StreamWriter archivo = new StreamWriter(rutaDescargas, false, Encoding.UTF8);
 
+        archivo.WriteLine("sep=;");
         archivo.WriteLine("Iw;Fw;s;Fp;Ip;Mp;Mw;Error");
 
         for (int cont = 0; cont < i; cont++)
@@ -271,7 +272,7 @@ void guardarArchivo()
     }
 }
 
-void leerArchivo() //es el encargado de abrir y recorrer el archivo
+void leerArchivo()
 {
     try
     {
@@ -282,15 +283,25 @@ void leerArchivo() //es el encargado de abrir y recorrer el archivo
 
         using StreamReader archivo = new StreamReader(rutaDescargas);
 
-        string? linea = archivo.ReadLine();
-
-        if (linea != null && !linea.StartsWith("Iw;"))
-        {
-            procesarLineaArchivo(linea);
-        }
+        string? linea;
 
         while ((linea = archivo.ReadLine()) != null && i < 15)
         {
+            if (string.IsNullOrWhiteSpace(linea))
+            {
+                continue;
+            }
+
+            if (linea.StartsWith("sep="))
+            {
+                continue;
+            }
+
+            if (linea.StartsWith("Iw;"))
+            {
+                continue;
+            }
+
             procesarLineaArchivo(linea);
         }
     }
@@ -300,7 +311,7 @@ void leerArchivo() //es el encargado de abrir y recorrer el archivo
     }
 }
 
-void procesarLineaArchivo(string linea) //es el encargado de convertir cada línea en una medición
+void procesarLineaArchivo(string linea)
 {
     if (i >= 15)
     {
@@ -408,4 +419,3 @@ struct Medicion
     public double Mw;
     public double error;
 }
-

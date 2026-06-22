@@ -286,7 +286,7 @@ void leerArchivo()
     }
     catch
     {
-        // Si el archivo está vacío, dañado o con formato incorrecto, se ignora para no detener el programa.
+        /* Si el archivo está vacío, dañado o con formato incorrecto, se ignora para no detener el programa.*/
     }
 }
 

@@ -96,45 +96,6 @@ mediciones_hidrostaticas.csv
 
 El archivo se guarda automáticamente en la carpeta **Descargas** del usuario.
 
-## Estructura del proyecto
-
-```text
-presion_hidr/
-│
-├── README.md
-├── presion_hidr.sln
-│
-├── presion_hidr/
-│   ├── Program.cs
-│   └── presion_hidr.csproj
-│
-├── Documentacion/
-│   ├── Documento del proyecto
-│   ├── Presentación
-│   ├── Diagrama de flujo
-│   └── Diagrama de estructura
-│
-└── Evidencias/
-    ├── Encuesta
-    ├── Entrevistas
-    └── Capturas del programa
-```
-
-## Ramas del repositorio
-
-El repositorio evidencia el trabajo colaborativo mediante ramas individuales por integrante:
-
-```text
-main
-develop
-feature/ronaldo
-feature/mariela
-feature/nijeri
-feature/julio
-```
-
-Cada rama contiene aportes relacionados con el desarrollo del sistema, sus módulos, documentación o evidencias del proyecto.
-
 ## Módulos principales del programa
 
 | Módulo / función       | Responsabilidad                                       |
